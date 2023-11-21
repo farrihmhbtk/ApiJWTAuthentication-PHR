@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "EquipmentMaster";
+}
+@model List<EquipmentMaster>
+
+<div class="row">
+    <div class="mb-2 text-center col-lg-12 @(ViewBag.StatusCode == 200 ? "bg-success" : "bg-danger")">
+        <b>@(ViewBag.StatusCode == 200 ? "Connect" : "Not Connect") [@ViewBag.StatusCode] - with API Ocelot</b>
+    </div>
+    <div class="col-lg-6">
+        <h1>EquipmentMaster</h1> <hr />
+        @if (ViewBag.ShowTable)
+        {
+            <a class="btn btn-primary btn-sm" asp-controller="EquipmentMaster" asp-action="Create">Add New</a>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Merk</th>
+                        <th>Type</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var _EquipmentMaster in Model)
+                    {
+                        <tr>
+                            <td>@_EquipmentMaster.Id</td>
+                            <td>@_EquipmentMaster.Name</td>
+                            <td>@_EquipmentMaster.Merk</td>
+                            <td>@_EquipmentMaster.Type</td>
+                            <td class="text-end">
+                                <form asp-controller="EquipmentMaster" asp-action="Delete" method="post">
+                                    <input type="hidden" name="id" value="@_EquipmentMaster.Id" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

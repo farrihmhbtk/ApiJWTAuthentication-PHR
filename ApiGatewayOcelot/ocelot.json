@@ -1,0 +1,158 @@
+{
+  "Routes": [
+    // Equipment - Equipment Master
+    {
+      "SwaggerKey": "Key_Equipment",
+      "DownstreamPathTemplate": "/api/EquipmentMaster",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7074
+        }
+      ],
+      "UpstreamPathTemplate": "/ApiGateway/Equipment/EquipmentMaster",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UpstreamHeaderTransform": {
+        "PHRKEYOcelot": "API123"
+      }
+    },
+    {
+      "SwaggerKey": "Key_Equipment",
+      "DownstreamPathTemplate": "/api/EquipmentMaster/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7074
+        }
+      ],
+      "UpstreamPathTemplate": "/ApiGateway/Equipment/EquipmentMaster/{id}",
+      "UpstreamHttpMethod": [ "Get", "Put", "Delete" ],
+      "UpstreamHeaderTransform": {
+        "PHRKEYOcelot": "API123"
+      }
+    },
+    // Equipment - Brand
+    {
+      "SwaggerKey": "Key_Equipment",
+      "DownstreamPathTemplate": "/api/Brand",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7074
+        }
+      ],
+      "UpstreamPathTemplate": "/ApiGateway/Equipment/Brand",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UpstreamHeaderTransform": {
+        "PHRKEYOcelot": "API123"
+      }
+    },
+    {
+      "SwaggerKey": "Key_Equipment",
+      "DownstreamPathTemplate": "/api/Brand/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7074
+        }
+      ],
+      "UpstreamPathTemplate": "/ApiGateway/Equipment/Brand/{id}",
+      "UpstreamHttpMethod": [ "Get", "Put", "Delete" ],
+      "UpstreamHeaderTransform": {
+        "PHRKEYOcelot": "API123"
+      }
+    },
+    // Well - Well Master
+    {
+      "SwaggerKey": "Key_Well",
+      "DownstreamPathTemplate": "/api/WellMaster",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7242
+        }
+      ],
+      "UpstreamPathTemplate": "/ApiGateway/Well/WellMaster",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UpstreamHeaderTransform": {
+        "PHRKEYOcelot": "API123"
+      }
+    },
+    {
+      "SwaggerKey": "Key_Well",
+      "DownstreamPathTemplate": "/api/WellMaster/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7242
+        }
+      ],
+      "UpstreamPathTemplate": "/ApiGateway/Well/WellMaster/{id}",
+      "UpstreamHttpMethod": [ "Get", "Put", "Delete" ],
+      "UpstreamHeaderTransform": {
+        "PHRKEYOcelot": "API123"
+      }
+    },
+    // Well - Well Test
+    {
+      "SwaggerKey": "Key_Well",
+      "DownstreamPathTemplate": "/api/WellTest",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7242
+        }
+      ],
+      "UpstreamPathTemplate": "/ApiGateway/Well/WellTest",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UpstreamHeaderTransform": {
+        "PHRKEYOcelot": "API123"
+      }
+    },
+    {
+      "SwaggerKey": "Key_Well",
+      "DownstreamPathTemplate": "/api/WellTest/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7242
+        }
+      ],
+      "UpstreamPathTemplate": "/ApiGateway/Well/WellTest/{id}",
+      "UpstreamHttpMethod": [ "Get", "Put", "Delete" ],
+      "UpstreamHeaderTransform": {
+        "PHRKEYOcelot": "API123"
+      }
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "Key_Equipment",
+      "Config": [
+        {
+          "Name": "Equipment API",
+          "Version": "v1",
+          "Url": "https://localhost:7074/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Key_Well",
+      "Config": [
+        {
+          "Name": "Well API",
+          "Version": "v1",
+          "Url": "https://localhost:7242/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}

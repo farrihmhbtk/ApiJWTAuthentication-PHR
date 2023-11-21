@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "WellMaster";
+}
+@model List<WellMaster>
+
+<div class="row">
+    <div class="mb-2 text-center col-lg-12 @(ViewBag.StatusCode == 200 ? "bg-success" : "bg-danger")">
+        <b>@(ViewBag.StatusCode == 200 ? "Connect" : "Not Connect") [@ViewBag.StatusCode] - with API Ocelot</b>
+    </div>
+    <div class="col-lg-6">
+        <h1>WellMaster</h1> <hr />
+        @if (ViewBag.ShowTable)
+        {
+            <a class="btn btn-primary btn-sm" asp-controller="WellMaster" asp-action="Create">Add New</a>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Area</th>
+                        <th>Type</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var _WellMaster in Model)
+                    {
+                        <tr>
+                            <td>@_WellMaster.Id</td>
+                            <td>@_WellMaster.Name</td>
+                            <td>@_WellMaster.Area</td>
+                            <td>@_WellMaster.Type</td>
+                            <td class="text-end">
+                                <form asp-controller="WellMaster" asp-action="Delete" method="post">
+                                    <input type="hidden" name="id" value="@_WellMaster.Id" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

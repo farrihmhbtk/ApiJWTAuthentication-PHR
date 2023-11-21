@@ -1,0 +1,39 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Route</h1>
+        <table id="userTable" class="table table-hover">
+            <thead>
+                <tr>
+                    <th rowspan="2">DownstreamPathTemplate</th>
+                    <th rowspan="2">DownstreamScheme</th>
+                    <th rowspan="2">UpstreamPathTemplate</th>
+                    <th colspan="2">DownstreamHostAndPort</th>
+                </tr>
+                <tr>
+                    <th>Host</th>
+                    <th>Port</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var _Route in ViewData["Route"] as dynamic[])
+                {
+                    var routeId = _Route.Id;
+                    var _DownstreamHostAndPort = (ViewData["DownstreamHostAndPort"] as dynamic[]).FirstOrDefault(hp => hp.RouteId == routeId);
+
+                    <tr>
+                        <td>@_Route.DownstreamPathTemplate</td>
+                        <td>@_Route.DownstreamScheme</td>
+                        <td>@_Route.UpstreamPathTemplate</td>
+                        <td>@(_DownstreamHostAndPort?.Host ?? "N/A")</td>
+                        <td>@(_DownstreamHostAndPort?.Port ?? "N/A")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

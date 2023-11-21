@@ -1,0 +1,131 @@
+﻿@model List<ApiGatewayOcelot.Models.KeyClient>
+@{
+    Layout = "_Layout";
+}
+
+<h1>KeyClient</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-secondary" role="alert">
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
+            <form action="/KeyClient/Create" method="POST">
+                <div class="row">
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="Id">Id</label>
+                            <input class="form-control" type="number" id="KC_Id_FORM_READONLY" required readonly>
+                            <input class="form-control" type="hidden" name="Id" id="KC_Id_FORM" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="KeyClientName">KeyClientName</label>
+                            <input class="form-control" type="text" name="KeyClientName" id="KC_KeyClientName_FORM" required>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="Status">Status</label>
+                            <select class="form-control" name="Status" id="KC_Status_FORM">
+                                <option value="">-</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-right">
+                        <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to add?')">Add New</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        @if (TempData["ErrorMessageTable"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessageTable"]
+            </div>
+        }
+        <table id="userTable" class="table table-hover">
+            <thead>
+                <tr>
+                    <th rowspan="2">Id</th>
+                    <th>KeyClientName</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in ViewData["KeyClientData"] as dynamic[])
+                {
+                    <tr>
+                        <td>@user.Id</td>
+                        <td>@user.KeyClientName</td>
+                        <td>@user.Status</td>
+                        <td class="text-right">
+                            <a class="btn btn-sm btn-danger" href="/KeyClient/Delete/@user.Id" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        function autoFillId() {
+            var ids = $("#userTable tbody tr").map(function () {
+                return parseInt($(this).find("td:nth-child(1)").text(), 10) || 0;
+            }).get();
+            var maxId = Math.max.apply(Math, ids);
+            $("#KC_Id_FORM").val(maxId + 1);
+            $("#KC_Id_FORM_READONLY").val(maxId + 1);
+        }
+        autoFillId();
+        function isDataUnique(keyClientName) {
+            var isUnique = true;
+            $("#userTable tbody tr").each(function () {
+                var existingKeyClientName = $(this).find("td:nth-child(2)").text();
+                if (
+                    existingKeyClientName === keyClientName
+                ) {
+                    isUnique = false;
+                    return false;
+                }
+            });
+            return isUnique;
+        }
+        $("form").submit(function (e) {
+            var keyClientName = $("#KC_KeyClientName_FORM").val();
+            if (!isDataUnique(keyClientName)) {
+                alert("Data sudah ada dalam tabel. Harap masukkan data yang berbeda.");
+                e.preventDefault();
+            }
+        });
+        $("#KC_KeyClientName_FORM, #KC_Status_FORM").on("keyup change", function () {
+            applyFiltersUser();
+        });
+
+        function applyFiltersUser() {
+            var _KC_Status = $("#KC_Status_FORM").val();
+            var _KC_KeyClientName = $("#KC_KeyClientName_FORM").val().toLowerCase();
+            $("#userTable tbody tr").each(function () {
+                var COL_KC_KeyClientName = $(this).find("td:nth-child(2)").text().toLowerCase();
+                var COL_KC_Status = $(this).find("td:nth-child(3)").text();
+                var showRow = (_KC_Status === "" || COL_KC_Status === _KC_Status) &&
+                    COL_KC_KeyClientName.includes(_KC_KeyClientName);
+                $(this).toggle(showRow);
+            });
+        }
+    });
+
+</script>
