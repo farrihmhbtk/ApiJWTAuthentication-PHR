@@ -16,7 +16,7 @@ namespace ApiGatewayOcelot.Controllers
         public async Task<IActionResult> Index()
         {
             dynamic[] keyClientData = _context.GetKeyClientData().OrderBy(kc => kc.Id).ToArray();
-            dynamic[] keyClientRouteData = _context.GetKeyClientRouteData().OrderBy(kcr => kcr.Id).ToArray(); ;
+            dynamic[] keyClientRouteData = _context.GetKeyClientRouteData().OrderBy(kcr => kcr.Id).ToArray();
 
             ViewData["KeyClientData"] = keyClientData;
             ViewData["keyClientRouteData"] = keyClientRouteData;

@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using Ocelot.Configuration;
+using Ocelot.Values;
+
 namespace ApiGatewayOcelot.Models
 {
     public class Route
@@ -49,6 +52,26 @@ namespace ApiGatewayOcelot.Models
                         { "PHRKEYOcelot", "API123" }
                     }
                 },
+
+                new Route
+                {
+                    DownstreamPathTemplate = "/api/Account",
+                        DownstreamScheme = "http",
+                    DownstreamHostAndPorts = new List<HostAndPort>
+                    {
+                        new HostAndPort
+                        {
+                            Host = "localhost",
+                            Port = 5654
+                        }
+                    },
+                    UpstreamPathTemplate = "/api/Account",
+                    UpstreamHttpMethod = new List<string> { "Post" },
+                    UpstreamHeaderTransform = new Dictionary<string, string>
+                    {
+                        { "PHRKEYOcelot", "API123" }
+                    }
+                }
                 // Tambahkan entri lain sesuai dengan format yang sama
             }
             };

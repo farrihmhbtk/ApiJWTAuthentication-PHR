@@ -19,7 +19,7 @@ builder.Services.AddOcelot();
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
 
 // Connection To Oracle
-var stringConnection = "User Id=c##apitest3;Password=apitest3;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SID=xe)));";
+var stringConnection = "User Id=c##apitest2;Password=apitest2;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SID=xe)));";
 builder.Services.AddDbContext<Context>
     (options => options.UseOracle(stringConnection));
 

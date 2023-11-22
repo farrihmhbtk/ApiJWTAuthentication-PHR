@@ -12,6 +12,7 @@ namespace ApiGatewayOcelot.Config
         {
             Database.EnsureCreated();
         }
+       
         
         public DbSet<KeyClient> KeyClient { get; set; }
         public DbSet<KeyClientRoute> KeyClientRoute { get; set; }
@@ -57,6 +58,8 @@ namespace ApiGatewayOcelot.Config
                 new KeyClientRoute { Id = IdKeyClientRoute++, KeyClientName = "KeyClientName_user1", Route = "/ApiGateway/Well/WellTest", Method = "GET" },
                 new KeyClientRoute { Id = IdKeyClientRoute++, KeyClientName = "KeyClientName_user1", Route = "/ApiGateway/Well/WellTest", Method = "POST" },
                 new KeyClientRoute { Id = IdKeyClientRoute++, KeyClientName = "KeyClientName_user1", Route = "/ApiGateway/Well/WellTest", Method = "DELETE" },
+                new KeyClientRoute { Id = IdKeyClientRoute++, KeyClientName = "KeyClientName_user1", Route = "/api/Account", Method = "POST" },
+
                 // KeyClientName_user2
                 new KeyClientRoute { Id = IdKeyClientRoute++, KeyClientName = "KeyClientName_user2", Route = "/ApiGateway/Equipment/EquipmentMaster", Method = "GET" },
                 new KeyClientRoute { Id = IdKeyClientRoute++, KeyClientName = "KeyClientName_user2", Route = "/ApiGateway/Equipment/EquipmentMaster", Method = "POST" },
