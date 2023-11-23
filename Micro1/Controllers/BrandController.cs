@@ -1,5 +1,6 @@
 ﻿using Micro1.Config;
 using Micro1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,7 @@ namespace Micro1.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Brand>>> ShowAll()
         {
             string cek_PHRAPPKEYOcelot = HttpContext.Request.Headers["PHRKEYOcelot"];
@@ -40,6 +42,7 @@ namespace Micro1.Controllers
             return await _context.Brand.ToListAsync();
         }
         [HttpPost]
+        //[Authorize(Roles = "Administrator")]
         public async Task<ActionResult<Brand>> Add(Brand _brand)
         {
             string cek_PHRAPPKEYOcelot = HttpContext.Request.Headers["PHRKEYOcelot"];
@@ -53,6 +56,7 @@ namespace Micro1.Controllers
             return Ok("Add Brand Success.");
         }
         [HttpDelete("{id}")]
+        //[Authorize(Roles = "Administrator, User")]
         public async Task<IActionResult> Delete(int id)
         {
             string cek_PHRAPPKEYOcelot = HttpContext.Request.Headers["PHRKEYOcelot"];
