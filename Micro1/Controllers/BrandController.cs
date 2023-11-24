@@ -31,7 +31,7 @@ namespace Micro1.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<IEnumerable<Brand>>> ShowAll()
         {
             /*
