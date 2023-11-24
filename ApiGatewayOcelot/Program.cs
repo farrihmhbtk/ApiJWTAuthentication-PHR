@@ -3,6 +3,7 @@ using ApiGatewayOcelot.Middleware;
 using Microsoft.EntityFrameworkCore;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using JwtAuthenticationManager;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,12 +24,15 @@ var stringConnection = "User Id=c##apitest2;Password=apitest2;Data Source=(DESCR
 builder.Services.AddDbContext<Context>
     (options => options.UseOracle(stringConnection));
 
+builder.Services.AddCustomJwtAuthentication();
+
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 app.UseStaticFiles();
 app.UseRouting();
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 

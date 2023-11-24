@@ -98,6 +98,13 @@
             "UpstreamHttpMethod": [ "Get", "Post" ],
             "UpstreamHeaderTransform": {
                 "PHRKEYOcelot": "API123"
+            },
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            },
+            "RouteClaimsRequirement": {
+                "Role": "Administrator"
             }
         },
         {
