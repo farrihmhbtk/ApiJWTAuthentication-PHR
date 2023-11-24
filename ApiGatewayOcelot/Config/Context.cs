@@ -12,7 +12,6 @@ namespace ApiGatewayOcelot.Config
         {
             Database.EnsureCreated();
         }
-       
         
         public DbSet<KeyClient> KeyClient { get; set; }
         public DbSet<KeyClientRoute> KeyClientRoute { get; set; }

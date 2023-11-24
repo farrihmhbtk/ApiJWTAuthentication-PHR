@@ -34,41 +34,51 @@ namespace Micro1.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<Brand>>> ShowAll()
         {
+            /*
             string cek_PHRAPPKEYOcelot = HttpContext.Request.Headers["PHRKEYOcelot"];
             if (cek_PHRAPPKEYOcelot != GetPHRAPPKEYOcelot())
             {
                 return BadRequest("PHRKEYOcelot Not Found or Incorrect.");
             }
+            */
             return await _context.Brand.ToListAsync();
         }
+
         [HttpPost]
         //[Authorize(Roles = "Administrator")]
+        [Authorize]
         public async Task<ActionResult<Brand>> Add(Brand _brand)
         {
+            /*
             string cek_PHRAPPKEYOcelot = HttpContext.Request.Headers["PHRKEYOcelot"];
             if (cek_PHRAPPKEYOcelot != GetPHRAPPKEYOcelot())
             {
                 return BadRequest("PHRKEYOcelot Not Found or Incorrect.");
             }
+            */
 
             _context.Brand.Add(_brand);
             await _context.SaveChangesAsync();
             return Ok("Add Brand Success.");
         }
+
         [HttpDelete("{id}")]
-        //[Authorize(Roles = "Administrator, User")]
+        [Authorize(Roles = "Administrator, User")]
         public async Task<IActionResult> Delete(int id)
         {
+            /*
             string cek_PHRAPPKEYOcelot = HttpContext.Request.Headers["PHRKEYOcelot"];
             if (cek_PHRAPPKEYOcelot != GetPHRAPPKEYOcelot())
             {
                 return BadRequest("PHRKEYOcelot Not Found or Incorrect.");
             }
+            */
             var _brand = await _context.Brand.FindAsync(id);
             if (_brand == null)
             {
                 return NotFound();
             }
+            
             _context.Brand.Remove(_brand);
             await _context.SaveChangesAsync();
             return Ok("Delete Brand Success.");
