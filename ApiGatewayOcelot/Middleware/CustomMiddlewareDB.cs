@@ -13,11 +13,6 @@ namespace ApiGatewayOcelot.Middleware
         }
         public async Task Invoke(HttpContext _HttpContext, Context _context)
         {
-            if (true)
-            {
-                await _next(_HttpContext);
-                return;
-            }
 
             string cek_KeyClientName = _HttpContext.Request.Headers["KeyClientName"];
             var keyClientData = _context.GetKeyClientData();
