@@ -16,8 +16,10 @@ namespace JwtAuthenticationManager
         {
             _userAccountList = new List<UserAccount>
             {
-                new UserAccount{ UserName = "admin", Password = "admin123", Role = "Administrator" },
-                new UserAccount{ UserName = "user01", Password = "user01", Role = "User" },
+                new UserAccount{ UserName = "KeyClientName_user1", Password = "user1", Role = "Administrator" },
+                new UserAccount{ UserName = "KeyClientName_user2", Password = "user2", Role = "User" },
+                new UserAccount{ UserName = "KeyClientName_user3", Password = "user3", Role = "User" },
+                new UserAccount{ UserName = "KeyClientName_user4", Password = "user4", Role = "User" },
             };
         }
 
