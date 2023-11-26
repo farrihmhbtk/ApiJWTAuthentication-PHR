@@ -16,10 +16,25 @@ namespace JwtAuthenticationManager
         {
             _userAccountList = new List<UserAccount>
             {
-                new UserAccount{ UserName = "KeyClientName_user1", Password = "user1", Role = "Administrator" },
-                new UserAccount{ UserName = "KeyClientName_user2", Password = "user2", Role = "User" },
-                new UserAccount{ UserName = "KeyClientName_user3", Password = "user3", Role = "User" },
-                new UserAccount{ UserName = "KeyClientName_user4", Password = "user4", Role = "User" },
+                new UserAccount{ UserName = "user1", Password = "user1", Role =  new List<string> 
+                {
+                   "Well-RW", "Equipment-RW"                } 
+                },
+                new UserAccount{ UserName = "user2", Password = "user2", Role =  new List<string>
+                {
+                   "Well-RO"
+                }
+                },
+                new UserAccount{ UserName = "user3", Password = "user3", Role =  new List<string>
+                {
+                   "Equipment-RO"
+                }
+                },
+                new UserAccount{ UserName = "user4", Password = "user4", Role =  new List<string>
+                {
+                   "Well-RW"
+                }
+                },
             };
         }
 
@@ -34,11 +49,27 @@ namespace JwtAuthenticationManager
 
             var tokenExpiryTimeStamp = DateTime.Now.AddMinutes(JWT_TOKEN_VALIDITY_MINS);
             var tokenKey = Encoding.ASCII.GetBytes(JWT_SECURITY_KEY);
+            var _claimsList = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Name, authenticationRequest.UserName)
+            };
+            foreach (var role in userAccount.Role)
+            {
+                _claimsList.Add(new Claim("Role", role));
+            }
+            var claimsIdentity = new ClaimsIdentity(_claimsList);
+            /*
             var claimsIdentity = new ClaimsIdentity(new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Name, authenticationRequest.UserName),
-                new Claim("Role", userAccount.Role)
+                //new Claim("Role", userAccount.Role)
+                foreach ( var role in userAccount.Role )
+                {
+                new Claim("Role", role);
+                }
+                
             });
+            */
 
             var signingCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(tokenKey),

@@ -20,10 +20,11 @@ builder.Services.AddOcelot();
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
 
 // Connection To Oracle
-var stringConnection = "User Id=c##apitest2;Password=apitest2;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SID=xe)));";
+var stringConnection = "Data Source=localhost;Initial Catalog=apitest2;User ID=sa;Password=admin123; TrustServerCertificate=True";
 builder.Services.AddDbContext<Context>
-    (options => options.UseOracle(stringConnection));
+    (options => options.UseSqlServer(stringConnection));
 
+// Add Authentication Service Using JwtAuthenticationManager
 builder.Services.AddCustomJwtAuthentication();
 
 builder.Services.AddSwaggerGen();
@@ -56,7 +57,7 @@ app.UseEndpoints(x =>
 });
 
 //app.UseMiddleware<CustomMiddleware>();
-app.UseMiddleware<CustomMiddlewareDB>();
+//app.UseMiddleware<CustomMiddlewareDB>();
 app.UseOcelot().Wait();
 
 app.Run();

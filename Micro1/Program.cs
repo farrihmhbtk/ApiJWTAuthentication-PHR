@@ -1,6 +1,5 @@
 using Micro1.Config;
 using Microsoft.EntityFrameworkCore;
-using JwtAuthenticationManager;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,12 +11,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCustomJwtAuthentication();
-
 // Connection To Oracle
-var stringConnection = "User Id=c##microapps1;Password=microapps1;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SID=xe)));";
+var stringConnection = "Data Source=localhost;Initial Catalog=microapps1;User ID=sa;Password=admin123; TrustServerCertificate=True";
 builder.Services.AddDbContext<Context>
-    (options => options.UseOracle(stringConnection));
+    (options => options.UseSqlServer(stringConnection));
 
 var app = builder.Build();
 

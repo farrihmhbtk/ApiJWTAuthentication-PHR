@@ -11,9 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Connection To Oracle
-var stringConnection = "User Id=c##microapps2;Password=microapps2;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SID=xe)));";
+var stringConnection = "Data Source=localhost;Initial Catalog=microapps2;User ID=sa;Password=admin123; TrustServerCertificate=True";
 builder.Services.AddDbContext<Context>
-    (options => options.UseOracle(stringConnection));
+    (options => options.UseSqlServer(stringConnection));
 
 var app = builder.Build();
 
